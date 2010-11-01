@@ -3,7 +3,10 @@ jmrod4tools
 
 Well, I'm all for tools!
 
-This project is a collection of **very simple** tools and tips.
+This project is a collection of **very simple** tools and tips for:
+
+- Ruby
+- Shell Scripts
 
 At the moment I use them mostly as memory hooks, but they could eventually evolve into something more ambitious.
 
