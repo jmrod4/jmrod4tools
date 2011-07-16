@@ -20,7 +20,7 @@ Add all your files and commit them!
 
 Create a remote repository 
 
-- go to github and just click (create) "New Repository"
+- go to your user Dashboard on github and just click (create) "New Repository"
 - you will get a private access address
 
 Connect your remote and local repositiories using your private access address
