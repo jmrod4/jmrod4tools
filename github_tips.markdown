@@ -70,9 +70,13 @@ CHANGING LOCAL
 
 	# do some wonderful changes first... and ready to commit
 
-	# stage changes (to index)
+	# stage changes *to index*
 	# (can undo with $ git reset HEAD ...)
 	$ git add .
+	
+	# remove undesired files from the directory *and index*
+	$ git rm <filename>
+	
 
 	# commiting changes (to local repo)
 	$ git commit -m "My changes description"
@@ -80,7 +84,7 @@ CHANGING LOCAL
 	# or optionally to fully type the message in an editor
 	$ git commit
 
-CHANGING REMOTE
+CHANGING WEB
 
 	$ git push origin master
 
@@ -95,6 +99,6 @@ SEEING GIT STATUS
 	# (show diffs of unstaged changes with last staged ones)
 	$ git diff
 	
-	# on linux also try
+	# on linux you can also try
 	tig
 
