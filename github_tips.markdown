@@ -87,6 +87,14 @@ CHANGING REMOTE
 SEEING GIT STATUS
 
 	$ git status
+	
+	# just the files 
 	$ git status -s
-	$ tig
+	
+	# shows the difference between the working tree and the index file.
+	# (show diffs of unstaged changes with last staged ones)
+	$ git diff
+	
+	# on linux also try
+	tig
 
