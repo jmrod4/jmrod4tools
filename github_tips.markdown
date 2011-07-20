@@ -5,9 +5,10 @@ Create the project directory and some files
 
 	$ mkdir yourproject
 	$ cd yourproject
+	# just to make sure there is some file to create/update...
 	$ touch README
 
-NOTE: from this point on you are supposed to be **into the yourproject directory**
+(from this point on you are supposed to be **into the yourproject directory**)
 
 Create an empty repository
 
@@ -18,23 +19,23 @@ Add all your files and commit them!
 	$ git add .
 	$ git commit -m 'first commit'
 
-Create a remote repository 
+Create a web repository 
 
 - go to your user Dashboard on github and just click (create) "New Repository"
 - you will get a private access address
 
-Connect your remote and local repositiories using your private access address
+Connect your web and local repositiories using your private access address
 
 	$ git remote add origin git@github.com:youruser/yourproject.git
 
-And finally pass your commits to the remote repo
+And finally pass your commits to the web repo
 
 	$ git push origin master
 
 Fork an Existing Project
 ------------------------
 
-Fork an existing project repo
+Fork an existing project repo:
 
 - log into github.com as youruser
 - go to the project you wish to fork
@@ -44,24 +45,21 @@ Fork an existing project repo
 Create (clone) a local repository
 
 	# create and enter the repository directory
-
 	$ mkdir hacketyhack
 	$ cd hacketyhack
 	
 	# get the files using the private access address
-
 	$ git clone git@github.com:youruser/hacketyhack.git
 
 Link to the real 'original'
 
 	# add another remote named 'upstream' with the original from the fork
-
 	$ git remote add upstream git://github.com/hacketyhack/hacketyhack.git
 
 Project Operation
 -----------------
 
-UPDATING FROM 'upstream'
+UPDATING FROM UPSTREAM
 
 	$ git fetch upstream
 	$ git merge upstream/master
@@ -70,11 +68,9 @@ CHANGING LOCAL
 
 	# do some wonderful changes first... and ready to commit
 
-	# remove undesired files from the directory *and index* 
-	#(and stage the changes)
+	# remove undesired files from directory *and index* (staging the changes)
 	$ git rm <filename>
-	# rename or move files 
-	# (and stage the changes)
+	# rename or move files (staging the changes)
 	$ git mv <source> <destination>
 
 	# stage changes *to index*
@@ -87,7 +83,7 @@ CHANGING LOCAL
 	# or optionally to fully type the message in an editor
 	$ git commit
 
-CHANGING WEB
+CHANGING INTERNET 
 
 	$ git push origin master
 
@@ -104,4 +100,3 @@ SEEING GIT STATUS
 	
 	# on linux you can also try
 	tig
-
