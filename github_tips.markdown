@@ -70,13 +70,16 @@ CHANGING LOCAL
 
 	# do some wonderful changes first... and ready to commit
 
+	# remove undesired files from the directory *and index* 
+	#(and stage the changes)
+	$ git rm <filename>
+	# rename or move files 
+	# (and stage the changes)
+	$ git mv <source> <destination>
+
 	# stage changes *to index*
 	# (can undo with $ git reset HEAD ...)
 	$ git add .
-	
-	# remove undesired files from the directory *and index*
-	$ git rm <filename>
-	
 
 	# commiting changes (to local repo)
 	$ git commit -m "My changes description"

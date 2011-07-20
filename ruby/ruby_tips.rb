@@ -224,6 +224,48 @@ puts h['first_name'], h['last_name'] # Is Albert Einstein
 /Russ|Russell/ !~ 'Fred' # true – the regular expression doesn't match
 
 
+########## CLASES
+
+class Wall
+  
+  def initialize(num_of_bottles)
+    @bottles = num_of_bottles # instance variables
+  end
+
+=begin rdoc
+Predicate, ends in a question mark, returns <b>Boolean</b>.
+=end
+  def empty?()              # predicate methods
+    @bottles.zero? 
+  end
+  
+  def sing_one_verse!()     # destructive methods
+    puts sing(' on the wall, ') + sing("\n") + take_one_down! + sing(" on the
+wall.\n\n")
+  end
+  
+  private                   # following are private methods
+
+  def sing(extra='')
+    "#{(@bottles > 0) ? @bottles : 'no more'} #{(@bottles == 1) ? 'bottle' :
+'bottles'} of beer" + extra
+  end
+
+=begin rdoc
+Destructive method named with a bang because it decrements @bottles.
+Returns a <b>String</b>.
+=end
+  def take_one_down!()
+    @bottles -= 1
+    'take one down, pass it around, '
+  end
+
+end
+
+
+
+
+
 
 
 ######### naming revisited

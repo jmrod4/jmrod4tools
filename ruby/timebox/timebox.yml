@@ -1,0 +1,20 @@
+--- !ruby/object:StackList 
+stacks: 
+- !ruby/object:TimeStack 
+  blocks: 
+  - !ruby/object:TimeBlock 
+    minutes: 1
+    title: Primer bloque de 1 minuto
+  - !ruby/object:TimeBlock 
+    minutes: 2
+    title: Segundo bloque de 2 minutos
+  title: Ejemplo de stack de 3 minutos
+- !ruby/object:TimeStack 
+  blocks: 
+  - !ruby/object:TimeBlock 
+    minutes: 4
+    title: Primer bloque de 4 minutos
+  - !ruby/object:TimeBlock 
+    minutes: 1
+    title: Segundo bloque de 1 minuto
+  title: Ejemplo de stack de 5 minutos
