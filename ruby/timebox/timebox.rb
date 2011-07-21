@@ -2,8 +2,8 @@
 # Copyright 2011 Juan M. Rodriguez 
 # You can redistribute and/or modify this software under the terms of GNU GPL v3 (or above) license
 
-Version = '0.1'
-Release = '2011/07/20'
+Version = '0.2'
+Release = '2011/07/21'
 
 require './application'
 require 'optparse'

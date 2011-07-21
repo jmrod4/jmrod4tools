@@ -14,7 +14,11 @@ end
 
 ######################################### SIMPLE BUT NEAT INTERACT
 
-def delete_line
+def softline_puts(line)
+  print "\r" + line.to_s
+end
+
+def softline_delete
   print "\r" + ' '*77 + "\r"
 end
 
@@ -48,3 +52,16 @@ def data_save(filename, data)
   end
 end
 
+def beep
+  print 7.chr
+  #print "\a"
+end
+
+
+########################################### MISCELANEA
+
+class String
+  def plural(number)
+    (number >= 2)? self + 's' : self
+  end
+end
