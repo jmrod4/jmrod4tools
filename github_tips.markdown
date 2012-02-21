@@ -1,3 +1,10 @@
+Help on github.com
+------------------
+
+- [set up git](http://help.github.com/set-up-git-redirect)
+- [create a repo](http://help.github.com/create-a-repo)
+- [fork a repo](http://help.github.com/fork-a-repo)
+
 Create a Totally New Project
 ----------------------------
 
@@ -44,12 +51,11 @@ Fork an existing project repo:
 
 Create (clone) a local repository
 
-	# create and enter the repository directory
-	$ mkdir hacketyhack
-	$ cd hacketyhack
-	
 	# get the files using the private access address
 	$ git clone git@github.com:youruser/hacketyhack.git
+
+	# enter into the just created repository directory
+	$ cd hacketyhack
 
 Link to the real 'original'
 

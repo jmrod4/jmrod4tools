@@ -1,3 +1,28 @@
+=begin
+something.rb - short description
+
+Copyright (c) 2011 Juan Manuel Rodriguez Ibañez
+
+You can redistribute and/or modify this software under the terms of the license GNU GPL v3 or later.
+
+=== Content / Description / Purpose
+Long description probably stating purpose and/or objective in writing the code.
+
+=== Sources / Bibliography: 
+* Surname, Name 2010. "Title" City: Editorial-Company
+
+=== Example / Interface
+
+
+
+=end
+
+=begin
+=== Design
+
+=end
+
+
 ######################### "RUBY CONVENTION" NAMING
 variable_name = 1
 CONSTANT = "don't change me"
@@ -27,14 +52,19 @@ $global_variable = 5    # global to everywhere
 ######################## EXTRA COOL TRICKS!!
 
 # one line conditional sentences
-puts 'sure print this' if 1==1  # works as expected
-1==1 || puts('sure print this')   # same but completly esoteric :)
+puts 'sure print this' if 1==1      # works as expected
+puts 'sure print this' unless 1==2  # a bit convoluted
+1==1 && puts('sure print this')     # same but completly esoteric :)
+1==2 || puts('sure print this')     # same but completly esoteric :)
 
-puts 'never print this' if not (1==1) # work as expected
+puts 'never print this' if 1==2     # work as expected
 puts 'never print this' unless 1==1 # same but JMR find it convoluted :)
+1==2 && puts('never print this')    # same but completly esoteric :)
+1==1 || puts('never print this')    # same but completly esoteric :)
 
 # puts (writes) a representation of the object (not just to_s)
 p 'string'
+puts 'string'.inspect   # equivalent
 
 # add one element to an array
 a = []
@@ -69,17 +99,59 @@ s = '1234'
 puts "Got a #{s.size} characters long string" 
 puts 'Got a ' + s.length.to_s + ' characters long string' # just the same
 
+p [1, 2, 3]             # just the same :) but returns the array
+puts [1, 2, 3].inspect  # just the same :) but returns nil
 
 
+# NON-STANDARD / MULTILINE QUOTES
 city = 'Washington'
 temp_f = 84
-puts("The city is #{city} and the temp is #{5.0/9.0 * (temp_f-32)} C")
 a_multiline_string = %Q{
   The city is #{city}.
   The temp is #{5.0/9.0 * (temp_f-32)} C
   }
-puts a_multiline_string
-puts %Q<some {parenthesis}...>
+a_multiline_string
+%Q<some {(parenthesis)} or [\<brackets\>] as delimiters...>
+%Q#any character as delimiter...#
+%/an alternative #{"way"}.../
+%q/and the 'single quotes' version don't interpret \t .../
+
+%w( this is an array of strings ) # returns an array of strings (words)
+
+%q/ /   # single-quoted
+%Q/ /   # double-quoted
+%/ /    # double-quoted
+%w/ /   # array
+%W/ /   # array double-quoted
+%r| |   # regular expression
+%s/ /   # symbol
+%x/ /   # operating system command
+
+p %q/dog cat #{1+2}/ #=> "dog cat \#{1+2}"
+p %Q/dog cat #{1+2}/ #=> "dog cat 3"
+p %/dog cat #{1+2}/ #=> "dog cat 3"
+p %w/dog cat #{1+2}/ #=> ["dog", "cat", "\#{1+2}"]
+p %W/dog cat #{1+2}/ #=> ["dog", "cat", "3"]
+p %r|^[a-z]*$| #=> /^[a-z]*$/
+p %s/dog/ #=> :dog
+p %x/vol/ #=> " Volume in drive C is OS [etc...]"
+
+# EXECUTING COMMANDS
+
+puts(`dir`)
+puts(%x/dir/)
+puts(%x{dir})
+
+Dir.entries( 'C:\\' ) # returns an array of files in C:\
+Dir.entries( 'C:/' )  # same
+
+print( "Goodbye #{%x{calc}}" ) # string is printed *after* the command
+
+# GET INFORMATION FROM OBJECTS
+o = 'c'       # => "c"
+o.class       # => String
+o.inspect     # => "\"c\""
+o.object_id   # => 23424948
 
 # RULE: false and nil evaluate to false, everything else evaluate to true
 if 0
@@ -101,21 +173,108 @@ p windows_home
 ############## STRINGS
 puts 
 puts 'STRING METHODS'
-#puts "Enter any string and press enter"
-#s = gets.chomp #remove trailing newline
-s = "my string"
-puts 'Got a ' + s.length.to_s + ' characters long string'
-puts "Got a #{s.size} characters long string" #just the same
-puts 'Playing with case...'
-puts 'upcase = ' + s.upcase
-puts 'downcase = ' + s.downcase
-puts 'swapcase = ' + s.swapcase
-puts 'capitalize = ' + s.capitalize
-puts 'Other string methods...'
-puts 'reverse = ' + s.reverse
-puts 'center = ' + s.center(50)
-puts 'ljust = ' + s.ljust(50)
-puts 'rjust = ' + s.rjust(50)
+
+s = "Hello " << "world"
+s = "Hello " + "world"
+s = "Hello " "world"
+s = s << 32       # add a character using ASCII code (space = 32)
+s = s << 65       # add a character using ASCII code (a = 65)
+s = s << 65.to_s  # add a "65" string
+
+i = 0
+begin
+s = "[" << i << ":" << i.to_s << "]"
+puts(s)
+i += 1
+end until i == 126
+
+s = "Hello world"
+s[0, 2]     # => "He"
+s[0..1]     # => "He"
+
+s[1, 3]     # => "ell"
+s[1..3]     # => "ell"
+s[4, 3]     # => "o w"
+s[4..6]     # => "o w"
+
+s[-1, 1]    # => "d"
+s[-1, 3]    # => "d"
+s[-3, 3]    # => "rld"
+s[-3..-1]   # => "rld"
+
+s[2]    # works differently in ruby 1.8 and 1.9
+s[2,1]  # equivalent and works the same in 1.8 and 1.9
+
+
+# non-destructive methods
+s = "Hello world"
+s.length      # => 11
+s.size        # => 11
+s.reverse     # => "dlrow olleH"
+s.upcase      # => "HELLO WORLD"
+s.capitalize  # => "Hello world"
+s.swapcase    # => "hELLO WORLD"
+s.downcase    # => "hello world"
+s.squeeze     # => "Helo world"
+s.split       # => ["Hello", "world"]
+s.center(20)  # => "    Hello world     "
+s.ljust(20)   # => "Hello world         "
+s.rjust(20)   # => "         Hello world"
+s.sub('world', 'home')    # => "Hello home"
+s.gsub('o', '<o>')        # => "Hell<o> w<o>rld"
+s             # => "Hello world"
+
+
+puts "The record separator is " + $/.inspect
+"line".chomp      # => "line"
+"line\n".chomp    # => "line"
+"line\r\n".chomp  # => "line"
+"line".chop       # => "lin"
+"line\n".chop     # => "line"
+"line\r\n".chop   # => "line"
+
+"line".chomp('in') # => "line"
+"line".chomp('ne') # => "li"
+
+# destructive methods
+s = "Hello world"
+s.insert(2, "X X")   
+s             # => "HeX Xllo world"
+s.reverse!
+s             # => "dlrow ollX XeH"
+
+# sprintf formats 
+#   %d – decimal number
+#   %f – floating-point number
+#   %o – octal number
+#   %p – inspect object
+#   %s – string
+#   %x – hexadecimal number
+
+# regular expressions
+x = "This is a test"
+puts x.sub(/^../, 'Hello')  # begin line   => 'Hellois is a test'
+puts x.sub(/..$/, 'Hello')  # end line     => 'This is a teHello'
+puts x.sub(/\A../, 'Hello') # begin string => 'Hellois is a test'
+puts x.sub(/..\Z/, 'Hello') # end string   => 'This is a teHello'
+
+"xyz".scan(/./)             # => ["x", "y", "z"]
+"xyz".scan(/./) { |letter| puts letter }
+
+"Short sentence. Another. No more.".split(/\./).inspect
+                            # => ["Short sentence", " Another", " No more"]
+
+# match is more powerful than =~
+
+puts "String has vowels" if "This is a test".match(/[aeiou]/)
+
+x = "This is a test".match(/(\w+) (\w+)/)
+puts x[0]   # whole match         <= This is
+puts x[1]   # first parenthesis   <= This
+puts x[2]   # second parenthesis  <= is
+
+puts ?x # => ASCII code of character x
+puts 120.chr # => character corresponding to 120 ASCII code
 
 
 ################## NUMBERS
@@ -179,7 +338,14 @@ puts
   puts 'ouch'
 end
 
-puts
+1.upto(5) { puts 'ouch' }
+10.downto(5) { puts 'ouch' }
+0.step(50, 5) { puts 'ouch' }
+
+1.upto(5) { |n| puts n }
+10.downto(5) { |n| puts n }
+0.step(50, 5) { |n| puts n }
+
 a = ['zero', 'one', 'two']
 a.each do |element|
   puts element
@@ -188,32 +354,82 @@ end
 ############### ARRAYS
 
 a = ['zero', 'one', 'two']
+a = 'zero', 'one', 'two'    # equivalent less conventional form
+b = 'this', 1, 'also', 3.14, 'works'  # another array
 p a
 p a.sort
 p a.reverse
-puts a.to_s
-puts a.join(', ')
-puts a.join('  :)  ') + '  8)'
+a.to_s                     # => ["zero", "one", "two"]
+a.inspect                  # => ["zero", "one", "two"]
+a.join                     # => zeroonetwo
+a.join(', ')               # => zero, one, two
+a.join('  :)  ') + '  8)'  # => zero  :)  one  :)  two  8)
 p [a, a]
+
+# you can convert the array elements with collect
+# note: map functionality is equivalent to collect
+a.collect { |element| element + '!' }            # => ["zero!", "one!", "two!"]
+[1, 2, 3, 4].collect { |element| element * 2 }   # => [2, 4, 6, 8] 
+
 puts 'nothing here...'
 200.times do
   puts []
 end
+
 puts 'poping'
 puts a.push('three')
 puts a.pop
 puts a.last
 
+x = [1, 2, 3, 4, 5]
+y = [1, 2, 3]
+z = x - y
+# x - y 
+# is equivalent here to:
+#   x2=x.dup; y.each { |e| x2.delete(e) }; x2
+p z                 # => [4, 5]
+
+x = []
+x.empty?        # => true
+x.nil?          # => false
+# if you try to access a nonexistant element...
+x[6].nil?       # => true
+
+x = [1, 2, 3]
+x.include?(3)   # => true
+x.include?(4)   # => false
+
+x.first         # => 1
+x.last          # => 3
+
+# I wish I'd known the following earlier!!
+x.first(2)      # => [1, 2]
+x.last(2)       # => [2, 3]
+
 ######### HASHES
 
 h = {}
+# note that key or value can be any type of object
+x = { 1 => "a", 2 => "b" }
 h = {'first_name' => 'Albert', 'last_name' => 'Einstein'}
-h = {:first_name => 'Albert', :last_name => 'Einstein'} # Symbols make good hash keys, so better
-p h
-# more traditional...
-h['first_name'] = 'Albert'
-h['last_name'] = 'Einstein'
-puts h['first_name'], h['last_name'] # Is Albert Einstein
+
+# you can also use symbols
+# BUT NOTE that 'last_name' and :last_name are different keys
+h[:first_name] = 'Pedro'
+h[:last_name] = 'Picasso'
+p h           # => {"first_name"=>"Albert", "last_name"=>"Einstein", :first_name=>"Pedro", :last_name=>"Picasso"}
+
+dictionary = { 'cat' => 'feline animal', 'dog' => 'canine animal' }
+dictionary.delete('cat')      # => "feline animal"
+dictionary                    # => {"dog"=>"canine animal"}
+
+x = { 1 => "a", 2 => "b" }
+x.each { |key, value| puts "#{key} equals #{value}" }
+x.keys       # => [1, 2]
+x.values     # => ["a", "b"]
+
+x.delete_if { |key, value| key < 2 }
+p x          # => {2=>"b"}
 
 ######### REGULAR EXPRESSIONS
 
@@ -222,6 +438,20 @@ puts h['first_name'], h['last_name'] # Is Albert Einstein
 /.*/ =~ 'any old string' # 0 - the RE will match anything
 /old/ !~ 'this old house' # false - the regular expression matchs
 /Russ|Russell/ !~ 'Fred' # true – the regular expression doesn't match
+
+# *     Match zero or more occurrences of the preceding character, 
+#       and match as many as possible.
+# +     Match one or more occurrences of the preceding character, 
+#       and match as many as possible.
+
+# *?    Match zero or more occurrences of the preceding character,
+#       and match as few as possible.
+# +?    Match one or more occurrences of the preceding character, 
+#       and match as few as possible.
+
+# ?     Match either one or none of the preceding character.
+# {x}   Match x occurrences of the preceding character.
+# {x,y} Match at least x occurrences and at most y occurrences.
 
 
 ########## CLASES
@@ -263,10 +493,34 @@ Returns a <b>String</b>.
 end
 
 
+if __FILE__ == $0
+  # process only if this file is directly executed
+end
 
 
+######### LIBRARY
 
+require 'logger'
 
+log = Logger.new(STDOUT)
+log.level = Logger::INFO
+# just to show how, shows same msg as default
+log.formatter = lambda { |severity, datetime, progname, msg|
+  "%s, [%s #%s]  %s -- %s: %s\n" % [
+    severity[0,1],
+    datetime.strftime("%Y-%m-%d %H:%M:%S.%6N"),
+    $$,
+    severity, 
+    progname, 
+    msg
+  ]
+}
+ 
+log.debug("Created logger")
+log.info("Program started")
+log.warn("Nothing to do!")
+
+log.info('myfunc') { "Something %s has happend " % ["wonderful"]}
 
 ######### naming revisited
 
