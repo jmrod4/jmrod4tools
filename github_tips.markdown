@@ -1,30 +1,35 @@
-Help on github.com
-------------------
+## Other's tips
 
-- [set up git](http://help.github.com/set-up-git-redirect)
-- [create a repo](http://help.github.com/create-a-repo)
-- [fork a repo](http://help.github.com/fork-a-repo)
+### help.github.com
 
-Create a Totally New Project
-----------------------------
+* [set up git](http://help.github.com/set-up-git-redirect)
+* [create a repo](http://help.github.com/create-a-repo)
+* [fork a repo](http://help.github.com/fork-a-repo)
+* [other cheat sheets!!](http://help.github.com/git-cheat-sheets/)
+
+### Books on line
+
+* "Pro Git" book by Scott Chacon at [progit.org](http://progit.org/)
+
+### Create a Totally New Project
 
 Create the project directory and some files
 
-	$ mkdir yourproject
-	$ cd yourproject
+	mkdir yourproject
+	cd yourproject
 	# just to make sure there is some file to create/update...
-	$ touch README
+	touch README
 
 (from this point on you are supposed to be **into the yourproject directory**)
 
 Create an empty repository
 
-	$ git init
+	git init
 
 Add all your files and commit them!
 
-	$ git add .
-	$ git commit -m 'first commit'
+	git add .
+	git commit -m 'first commit'
 
 Create a web repository 
 
@@ -33,14 +38,13 @@ Create a web repository
 
 Connect your web and local repositiories using your private access address
 
-	$ git remote add origin git@github.com:youruser/yourproject.git
+	git remote add origin git@github.com:youruser/yourproject.git
 
 And finally pass your commits to the web repo
 
-	$ git push origin master
+	git push origin master
 
-Fork an Existing Project
-------------------------
+### Fork an Existing Project
 
 Fork an existing project repo:
 
@@ -52,57 +56,135 @@ Fork an existing project repo:
 Create (clone) a local repository
 
 	# get the files using the private access address
-	$ git clone git@github.com:youruser/hacketyhack.git
+	git clone git@github.com:youruser/hacketyhack.git
 
 	# enter into the just created repository directory
-	$ cd hacketyhack
+	cd hacketyhack
 
 Link to the real 'original'
 
 	# add another remote named 'upstream' with the original from the fork
-	$ git remote add upstream git://github.com/hacketyhack/hacketyhack.git
+	git remote add upstream git://github.com/hacketyhack/hacketyhack.git
 
-Project Operation
------------------
+## git cheat sheet
 
-UPDATING FROM UPSTREAM
+GETTING INFO ABOUT REMOTES
 
-	$ git fetch upstream
-	$ git merge upstream/master
+	# show your configured remotes and the URL associated with them
+	git remote -v
+
+    # get more detailed info on a remote
+	git remote show <remote>
+
+	# other maybe useful commands for managing remotes
+	git remote rename <remote_oldname> <remote_newname>
+	git remote rm <remote>
+	
+UPDATING FROM REMOTES (INTERNET)
+
+	# get everything new from remote 
+	# (doesn't merge or modify your local changes)
+	git fetch <remote>
+	
+	# fetches data from the server you originally cloned from and automatically
+	# tries to merge it into the code you’re currently working on
+	git pull
+	
+	# for and unmodified github clone/fork usually would be
+	#   git merge origin/master
+	git merge <remote>/<branch>
 
 CHANGING LOCAL
 
 	# do some wonderful changes first... and ready to commit
 
-	# remove undesired files from directory *and index* (staging the changes)
-	$ git rm <filename>
+	# remove undesired files
+	git rm <filename>
 	# rename or move files (staging the changes)
-	$ git mv <source> <destination>
+	git mv <source> <destination>
 
-	# stage changes *to index*
-	# (can undo with $ git reset HEAD ...)
-	$ git add .
+	# remove the file from the staged area (but not from the disk)
+	git rm --cached <filename>
+		
+	# stage changes
+	# (can undo staging with $ git reset HEAD <filename>)
+	git add .
+	
+	# discard the disk_file and restore it from last commit: 
+	# YOU WILL LOSE YOUR CHANGES
+	git checkout -- <filename>
 
-	# commiting changes (to local repo)
-	$ git commit -m "My changes description"
+	# commiting (saving) your changes invocating an editor to type a message
+	git commit
+	# optionally supply the message in the command line
+	git commit -m "My changes description"
+	# if you messed up the message... there is still some hope
+	git commit --amend
 
-	# or optionally to fully type the message in an editor
-	$ git commit
+CHANGING REMOTES (INTERNET)
 
-CHANGING INTERNET 
+When you have your project at a point that you want to share, you have to push it upstream. 
 
-	$ git push origin master
+	# show your configured remotes and the URL associated with them
+	git remote -v
+	
+	# pushing to our internet repository:
+	# (normally with github remote=origin, branch=master)
+	# ex. git push origin master
+    git push <remote> <branch>
 
 SEEING GIT STATUS
 
-	$ git status
+	# where was I? :)
+	git status
 	
 	# just the files 
-	$ git status -s
+	git status -s
 	
-	# shows the difference between the working tree and the index file.
-	# (show diffs of unstaged changes with last staged ones)
-	$ git diff
+	# show diffs on local: last_commit vs. disk_file
+	# show diffs on local: disk_file vs. cache_staged
+	# it happens when you stage a file and edit/modify before committing
+	git diff
 	
-	# on linux you can also try
-	tig
+	# show diffs on local: cache_staged vs. cache_lastcommit
+	# same as git diff --cached
+	git diff --staged
+	
+	# see last commits / extract history
+	git log
+	
+	# ... or use a GUI to visualize history (HIGHLY RECOMMENDED)
+	gitk
+
+USING TAGS
+
+	# assign a (lightweight) tag 
+	# ex. git tag v0.1
+	git tag <tag>
+	
+	# assign a (annotated) tag
+	# ex. git tag -a v1.4 -m 'my version 1.4'
+	git tag -a <tag>
+	
+	# see used tags
+	git tag
+	
+	# see one tag details 
+	git show <tag>
+	
+	# transfering tags to remote
+	# ex. git push origin v0.1
+	git push <remote> <tag>
+	
+	# or alternatively, transfer all local tags to remote
+	# ex. git push origin --tags
+	git push <remote> --tags
+	
+USING BRANCHES
+
+	# create a branch
+	git branch <branch_name>
+	# switch to it
+	git checkout <branch_name>
+	# create and switch
+	git checkout -b <branch_name>
