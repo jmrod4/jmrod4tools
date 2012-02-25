@@ -7,7 +7,17 @@
 * [fork a repo](http://help.github.com/fork-a-repo)
 * [other cheat sheets!!](http://help.github.com/git-cheat-sheets/)
 
-### Books on line
+### External Links
+
+* [git home](http://git-scm.com/)
+* blog [git ready](http://gitready.com/)
+
+Aditionally you can get help on your system (problably in HTML) using:
+
+	# ex. git help push
+	git help <command>
+
+### Books On Line
 
 * "Pro Git" book by Scott Chacon at [progit.org](http://progit.org/)
 
