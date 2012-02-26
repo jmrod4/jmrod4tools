@@ -3,15 +3,20 @@ ruby_patterns
 
 some examples and notes about design of ruby programs making emphasis in design patterns
 
+Warning: this is mainly a cheat sheet for myself, others may want to take a look to the reference materials at the bottom.
+
+
 General Principles
 ------------------
 
 * Prefer composition over inheritance (Olsen 2007 p.7)
 
+
 Behavioral patterns
 -------------------
 
 Most of these design patterns are specifically concerned with communication between objects
+
 
 ### Template Method 
 
@@ -31,27 +36,35 @@ Olsen (Olsen 2007) recomends an evolutionary approach:
 >
 > Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations.
 
+
 ### Strategy
 
 **allows one of a family of algorithms to be selected on-the-fly at runtime**
 
-Ruby example: a external baseclass define which are the abstract methods to implement the variant part of algorithm, then the subclasses implement a concrete variant of the algorithm and are passed as an initialize argument (thus in run time) to the class that implements the invariant logic.
+Ruby example: a external baseclass define which are the abstract methods that will contain the variant part of algorithm (**strategy**) and then subclass it to implement concrete variants (strategies) of the algorithm and are passed as an initialize argument (thus in run time) to the class (**context**) that implements the invariant logic.
+
+Alternatively as argument you can pass a instance of the strategy or just its class name.
+
 
 ### Command
 
 creates objects which encapsulate actions and parameters
 
+
 ### Interpreter
 
 implements a specialized language
+
 
 ### Iterator
 
 accesses the elements of an object sequentially without exposing its underlying representation
 
+
 ### Observer
 
 is a publish/subscribe pattern which allows a number of observer objects to see an event
+
 
 Structural Patterns
 -------------------
