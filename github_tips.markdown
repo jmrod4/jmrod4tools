@@ -192,9 +192,18 @@ USING TAGS
 	
 USING BRANCHES
 
-	# create a branch
-	git branch <branch_name>
-	# switch to it
-	git checkout <branch_name>
-	# create and switch
-	git checkout -b <branch_name>
+	# create a branch...
+	git branch <newbranch>
+	# ...and switch to it
+	git checkout <newbranch>
+	
+	# or alternatively create and switch
+	git checkout -b <branch>
+	
+    # branch from a tag
+	git branch <newbranch> <tag>
+	# ...and switch to it
+	git checkout <newbranch>
+	
+	# or alternatively branch from tag and switch to it
+	git checkout -b <newbranch> <tag>
