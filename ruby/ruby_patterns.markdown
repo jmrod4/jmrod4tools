@@ -17,24 +17,25 @@ Most of these design patterns are specifically concerned with communication betw
 
 **defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior**
 
-Ruby example: *base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses implementing the variations.
+Ruby example: *baseclass* contains the invariant logic plus some empty methods that could (*hook methods* to hint use) or must (abstact methods) be overriden in the subclasses implementing the variations.
 
 Olsen (Olsen 2007) recomends an evolutionary approach:
  
-* "Start with one variation and simply code as though it was the only problem   that you need to solve."
-
-* "Next, you could refactor the method that will become the template method so   that it calls other methods for the variable parts of the algorithm, but still  just focus on the one case."
-
-* "Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations."
+> Start with one variation and simply code as though it was the only problem   that you need to solve.
+>
+> [...]
+>
+> Next, you could refactor the method that will become the template method so   that it calls other methods for the variable parts of the algorithm, but still  just focus on the one case.
+>
+> [...]
+>
+> Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations.
 
 ### Strategy
 
 **allows one of a family of algorithms to be selected on-the-fly at runtime**
 
-Ruby example: a external baseclass define the algorithm methods, the subclasses of this external baseclass, that implements the algorith methods, are passed as an initialize argument (thus in run time) to our class.
-
-
-
+Ruby example: a external baseclass define which are the abstract methods to implement the variant part of algorithm, then the subclasses implement a concrete variant of the algorithm and are passed as an initialize argument (thus in run time) to the class that implements the invariant logic.
 
 ### Command
 
