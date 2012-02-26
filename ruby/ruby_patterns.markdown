@@ -15,9 +15,9 @@ Most of these design patterns are specifically concerned with communication betw
 
 ### Template Method 
 
-defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior
+**defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior**
 
-the abstract *base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses
+the abstract **base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses
 
 Olsen (Olsen 2007) recomends an evolutionary approach:
  
