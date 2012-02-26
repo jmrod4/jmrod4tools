@@ -19,15 +19,13 @@ defines the skeleton of an algorithm as an abstract class, allowing its subclass
 
 the abstract *base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses
 
-Olsen (Olsen 2007) recomends an evolutionary approach: 
-* "Start with one variation and simply code as though it was the only problem
-  that you need to solve."
-* "Next, you could refactor the method that will become the template method so
-  that it calls other methods for the variable parts of the algorithm, but still
-  just focus on the one case."
-* "Finally, you could create a subclass for your first case and move your
-  specific implementation into that subclass. At this point, you are ready to
-  start coding the rest of the variations."
+Olsen (Olsen 2007) recomends an evolutionary approach:
+ 
+* "Start with one variation and simply code as though it was the only problem   that you need to solve."
+
+* "Next, you could refactor the method that will become the template method so   that it calls other methods for the variable parts of the algorithm, but still  just focus on the one case."
+
+* "Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations."
 
 ### Command
 
