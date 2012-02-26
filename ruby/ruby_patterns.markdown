@@ -1,7 +1,7 @@
 ruby_patterns
 =============
 
-some examples and notes about design of ruby programs
+some examples and notes about design of ruby programs making emphasis in design patterns
 
 General Principles
 ------------------
@@ -17,7 +17,7 @@ Most of these design patterns are specifically concerned with communication betw
 
 **defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior**
 
-the abstract **base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses
+Ruby example: *base class* contains *hook methods* (i.e. empty) that could/must be overriden in the subclasses implementing the variations.
 
 Olsen (Olsen 2007) recomends an evolutionary approach:
  
@@ -26,6 +26,15 @@ Olsen (Olsen 2007) recomends an evolutionary approach:
 * "Next, you could refactor the method that will become the template method so   that it calls other methods for the variable parts of the algorithm, but still  just focus on the one case."
 
 * "Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations."
+
+### Strategy
+
+**allows one of a family of algorithms to be selected on-the-fly at runtime**
+
+Ruby example: a external baseclass define the algorithm methods, the subclasses of this external baseclass, that implements the algorith methods, are passed as an initialize argument (thus in run time) to our class.
+
+
+
 
 ### Command
 
@@ -42,10 +51,6 @@ accesses the elements of an object sequentially without exposing its underlying 
 ### Observer
 
 is a publish/subscribe pattern which allows a number of observer objects to see an event
-
-### Strategy
-
-allows one of a family of algorithms to be selected on-the-fly at runtime
 
 Structural Patterns
 -------------------
@@ -100,6 +105,6 @@ Sources / Bibliography
 
 * GoF (The "Gang of Four") 1994. "Design Patterns: Elements of Reusable Object-Oriented Software" USA: Addison-Wesley 
 * Olsen, Russ 2007. "Design Patterns in Ruby" Boston: Pearson Education
-* Olsen, Russ [Companion site](http://designpatternsinruby.com/) for the "Design Patterns in Ruby" book
+* Olsen, Russ Companion site <designpatternsinruby.com> for the "Design Patterns in Ruby" book
 * [Wikipedia article on the "Design Patterns" book](http://en.wikipedia.org/wiki/Design_Patterns)
 
