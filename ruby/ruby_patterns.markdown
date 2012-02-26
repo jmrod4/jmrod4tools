@@ -3,7 +3,7 @@ ruby_patterns
 
 some examples and notes about design of ruby programs making emphasis in design patterns
 
-Warning: this is mainly a cheat sheet for myself, others may want to take a look to the reference materials at the bottom.
+Warning: this is mainly a cheat sheet for myself, others may want to take a look to the materials referenced at the bottom.
 
 
 General Principles
@@ -36,15 +36,48 @@ Olsen (Olsen 2007) recomends an evolutionary approach:
 >
 > Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations.
 
+Cons: relay heavily in inheritance (more coupling, less flexibility)
+
 
 ### Strategy
 
 **allows one of a family of algorithms to be selected on-the-fly at runtime**
 
+#### Strategy with inheritance / classes
+
 Ruby example: a external baseclass define which are the abstract methods that will contain the variant part of algorithm (**strategy**) and then subclass it to implement concrete variants (strategies) of the algorithm and are passed as an initialize argument (thus in run time) to the class (**context**) that implements the invariant logic.
 
-Alternatively as argument you can pass a instance of the strategy or just its class name.
+As a note, you don't need the base class at all if you just make sure the strategies ones have the correct methods. 
 
+And you can pass alternatively as argument a instance of the strategy or just its class name)
+
+Data can be passed from the context to the strategy using *self* as argument in the strategy method call (even if it increases the coupling between them)
+
+Pitfalls: getting wrong the interface between the context and the strategy, it should be as uncoupled as possible.
+
+
+#### Strategy with procs
+
+You can substitute the strategies clasess with proc objects (blocks of code).
+
+	class SomeObject
+	  def initialize (&strategy)
+		@strategy = strategy
+	  end
+	  
+	  def use_strategy
+		@strategy.call(self)
+	  end
+	end
+
+	STRATEGY_1 = lambda do |context|
+	  # the strategy code using context.data / context.method
+	end
+	
+	some_object = SomeObject.new &STRATEGY_1
+	some_object.use_strategy
+
+Cons: proc approach "works only when the strategy interface is a single method affair".
 
 ### Command
 
@@ -119,6 +152,6 @@ Sources / Bibliography
 
 * GoF (The "Gang of Four") 1994. "Design Patterns: Elements of Reusable Object-Oriented Software" USA: Addison-Wesley 
 * Olsen, Russ 2007. "Design Patterns in Ruby" Boston: Pearson Education
-* Olsen, Russ Companion site <designpatternsinruby.com> for the "Design Patterns in Ruby" book
+* Olsen, Russ Companion site <http://designpatternsinruby.com> for the "Design Patterns in Ruby" book
 * [Wikipedia article on the "Design Patterns" book](http://en.wikipedia.org/wiki/Design_Patterns)
 
