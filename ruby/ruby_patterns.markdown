@@ -20,9 +20,9 @@ Most of these design patterns are specifically concerned with communication betw
 
 ### Template Method 
 
-**defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior**
+**defines the skeleton of an algorithm as an abstract class, allowing its subclasses to provide concrete behavior** (pushes down the variable parts of the algorithm into a subclass)
 
-Ruby example: *baseclass* contains the invariant logic plus some empty methods that could (*hook methods* to hint use) or must (abstact methods) be overriden in the subclasses implementing the variations.
+Ruby example: *baseclass* contains the invariant logic plus (optionaly) some methods that could (empty *hook methods* to hint use) or must (abstract methods) be overriden in the subclasses implementing the variations.
 
 Olsen (Olsen 2007) recomends an evolutionary approach:
  
@@ -36,12 +36,14 @@ Olsen (Olsen 2007) recomends an evolutionary approach:
 >
 > Finally, you could create a subclass for your first case and move your  specific implementation into that subclass. At this point, you are ready to  start coding the rest of the variations.
 
-Cons: relay heavily in inheritance (more coupling, less flexibility)
+Pitfalls: overdue things trying to cover all possibilities
+
+Cons: relay heavily in inheritance: more (potential) coupling, less flexibility
 
 
 ### Strategy
 
-**allows one of a family of algorithms to be selected on-the-fly at runtime**
+**allows one of a family of algorithms to be selected on-the-fly at runtime** (implements the variable parts of the algorithm as a separate object: class or proc)
 
 #### Strategy with inheritance / classes
 
@@ -51,7 +53,7 @@ As a note, you don't need the base class at all if you just make sure the strate
 
 And you can pass alternatively as argument a instance of the strategy or just its class name)
 
-Data can be passed from the context to the strategy using *self* as argument in the strategy method call (even if it increases the coupling between them)
+When complex data has to be shared then it can be passed from the context to the strategy using *self* as argument in the strategy method call (even if it increases the coupling between them)
 
 Pitfalls: getting wrong the interface between the context and the strategy, it should be as uncoupled as possible.
 
@@ -79,6 +81,70 @@ You can substitute the strategies clasess with proc objects (blocks of code).
 
 Cons: proc approach "works only when the strategy interface is a single method affair".
 
+An example of strategy with procs is the implementation of sort:
+
+	# the proc takes two arguments and must return (like the <=> operator):
+	#	1 if 1st element is larger
+	#	0 if equal
+	#	-1 if 2nd element is larger
+	a.sort { |a,b| a.length <=> b.length }
+	
+
+### Observer
+
+**is a publish/subscribe pattern which allows a number of observer objects to see an event**
+
+#### Observer using the Ruby Observable mixin
+
+	require 'observer'
+	
+	class MySubjectClass
+	  include Observable
+	
+	  def my_method_to_observe(somearg)
+		#... some code
+		changed                # needed to set that something really changed
+		notify_observers(self) # (also set changed flag to false)
+	  end
+	  
+	end
+
+#### Observer with code blocks
+
+	module Subject
+	  def initialize
+	    @observers=[]
+	  end
+	  
+	  def add_observer(&observer)
+	    @observers << observer
+      end
+	  
+	  def delete_observer(observer)
+	    @observers.delete(observer)
+	  end
+	  
+	  def notify_observers
+	    @observers.each do |observer|
+	      observer.call(self)
+	    end
+      end
+    end
+	
+	class MySubjectClass
+	  include Subject
+	  
+	  def my_method_to_observe(somearg)
+	    #... some code that need to be notified
+		notify_observers
+	  end
+	end
+	
+	obj = MySubjectClass.new(someargs)
+	obj.add_observer do |my_subject|
+	  #... some code done as response to notification
+	end
+	
 ### Command
 
 creates objects which encapsulate actions and parameters
@@ -92,11 +158,6 @@ implements a specialized language
 ### Iterator
 
 accesses the elements of an object sequentially without exposing its underlying representation
-
-
-### Observer
-
-is a publish/subscribe pattern which allows a number of observer objects to see an event
 
 
 Structural Patterns
