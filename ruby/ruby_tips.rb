@@ -498,29 +498,6 @@ if __FILE__ == $0
 end
 
 
-######### LIBRARY
-
-require 'logger'
-
-log = Logger.new(STDOUT)
-log.level = Logger::INFO
-# just to show how, shows same msg as default
-log.formatter = lambda { |severity, datetime, progname, msg|
-  "%s, [%s #%s]  %s -- %s: %s\n" % [
-    severity[0,1],
-    datetime.strftime("%Y-%m-%d %H:%M:%S.%6N"),
-    $$,
-    severity, 
-    progname, 
-    msg
-  ]
-}
- 
-log.debug("Created logger")
-log.info("Program started")
-log.warn("Nothing to do!")
-
-log.info('myfunc') { "Something %s has happend " % ["wonderful"]}
 
 ######### naming revisited
 
