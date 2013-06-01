@@ -1,3 +1,11 @@
+This is some info I compiled about open source licenses some time ago 
+(2009). I keep them here just as a reminder to myself of the posible 
+choices when releasing a piece of software.
+
+None of this licenses represent the license this project is released with. 
+You can find the license applicable to this project in the file LICENSE.txt
+
+
 COMPATIBLE GPL LICENSES (as of 2009)
 
 (GPL v3 recommended note)
@@ -115,7 +123,9 @@ COMPATIBLE GPL LICENSES (as of 2009)
 
 
 ---------------------------------------------------------------------
+
 CITING SOURCES
+
 even better, no using sources...
 
 (Wrox-Wiley compulsory acknowledge)
