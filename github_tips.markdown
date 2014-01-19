@@ -1,89 +1,13 @@
-## Other's tips
+# GIT tips
 
-### help.github.com
-
-* [set up git](http://help.github.com/set-up-git-redirect)
-* [create a repo](http://help.github.com/create-a-repo)
-* [fork a repo](http://help.github.com/fork-a-repo)
-* [other cheat sheets!!](http://help.github.com/git-cheat-sheets/)
-
-### External Links
-
-* [git home](http://git-scm.com/)
-* blog [git ready](http://gitready.com/)
-
-Aditionally you can get help on your system (problably in HTML) using:
-
-	# ex. git help push
-	git help <command>
-
-### Books On Line
-
-* "Pro Git" book by Scott Chacon at [progit.org](http://progit.org/)
-
-### Create a Totally New Project
-
-Create the project directory and some files
-
-	mkdir yourproject
-	cd yourproject
-	# just to make sure there is some file to create/update...
-	touch README
-
-(from this point on you are supposed to be **into the yourproject directory**)
-
-Create an empty repository
-
-	git init
-
-Add all your files and commit them!
-
-	git add .
-	git commit -m 'first commit'
-
-Create a web repository 
-
-- go to your user Dashboard on github and just click (create) "New Repository"
-- you will get a private access address
-
-Connect your web and local repositiories using your private access address
-
-	git remote add origin git@github.com:youruser/yourproject.git
-
-And finally pass your commits to the web repo
-
-	git push origin master
-
-### Fork an Existing Project
-
-Fork an existing project repo:
-
-- log into github.com as youruser
-- go to the project you wish to fork
-- press fork button 
-- copy the private access address
-
-Create (clone) a local repository
-
-	# get the files using the private access address
-	git clone git@github.com:youruser/hacketyhack.git
-
-	# enter into the just created repository directory
-	cd hacketyhack
-
-Link to the real 'original'
-
-	# add another remote named 'upstream' with the original from the fork
-	git remote add upstream git://github.com/hacketyhack/hacketyhack.git
-
-## git cheat sheet
+## GIT cheat sheet
 
 GETTING INFO ABOUT REMOTES
 
 	# show your configured remotes and the URL associated with them
 	git remote -v
 
-    # get more detailed info on a remote
+	# get more detailed info on a remote
 	git remote show <remote>
 
 	# other maybe useful commands for managing remotes
@@ -141,7 +65,7 @@ When you have your project at a point that you want to share, you have to push i
 	# pushing to our internet repository:
 	# (normally with github remote=origin, branch=master)
 	# ex. git push origin master
-    git push <remote> <branch>
+	git push <remote> <branch>
 
 SEEING GIT STATUS
 
@@ -200,10 +124,91 @@ USING BRANCHES
 	# or alternatively create and switch
 	git checkout -b <branch>
 	
-    # branch from a tag
+	# branch from a tag
 	git branch <newbranch> <tag>
 	# ...and switch to it
 	git checkout <newbranch>
 	
 	# or alternatively branch from tag and switch to it
 	git checkout -b <newbranch> <tag>
+
+## Basic GIT operation
+
+### Create a Totally New Project
+
+Create the project directory and some files
+
+	mkdir yourproject
+	cd yourproject
+	# just to make sure there is some file to create/update...
+	touch README
+
+(from this point on you are supposed to be **into the yourproject directory**)
+
+Create an empty repository
+
+	git init
+
+Add all your files and commit them!
+
+	git add .
+	git commit -m 'first commit'
+
+Create a web repository 
+
+- go to your user Dashboard on github and just click (create) "New Repository"
+- you will get a private access address
+
+Connect your web and local repositiories using your private access address
+
+	git remote add origin git@github.com:youruser/yourproject.git
+
+And finally pass your commits to the web repo
+
+	git push origin master
+
+### Fork an Existing Project
+
+Fork an existing project repo:
+
+- log into github.com as youruser
+- go to the project you wish to fork
+- press fork button 
+- copy the private access address
+
+Create (clone) a local repository
+
+	# get the files using the private access address
+	git clone git@github.com:youruser/hacketyhack.git
+
+	# enter into the just created repository directory
+	cd hacketyhack
+
+Link to the real 'original'
+
+	# add another remote named 'upstream' with the original from the fork
+	git remote add upstream git://github.com/hacketyhack/hacketyhack.git
+
+## GIT tips from others
+
+### help.github.com
+
+* [set up git](http://help.github.com/set-up-git-redirect)
+* [create a repo](http://help.github.com/create-a-repo)
+* [fork a repo](http://help.github.com/fork-a-repo)
+* [other cheat sheets!!](http://help.github.com/git-cheat-sheets/)
+
+### External Links
+
+* [git home](http://git-scm.com/)
+* blog [git ready](http://gitready.com/)
+
+Aditionally you can get help on your system (problably in HTML) using:
+
+	# ex. git help push
+	git help <command>
+
+### Books On Line
+
+* "Pro Git" book by Scott Chacon at [progit.org](http://progit.org/)
+

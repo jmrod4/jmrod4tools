@@ -1,4 +1,5 @@
 #!/bin/bash
+
 COPY="Copyright (C) 2007-2009 Juan Manuel Rodríguez"
 LICENSE="Licensed under GNU GPL version 3 or (at your option) any later version."
 
@@ -11,11 +12,12 @@ HISTORY=<<ENDHISTORY
 2007 Nov 29: App template created - console_app2.sh v1
 2008 Sep 17: App template heavily revised - console_rich.sh v1
 2009 Sep 12: App template modified - sh_console_app4.sh
+2013 Jun 01: integrated into jmrod4tools github project - console_app_rich.sh v0.2
 ENDHISTORY
 
 
 ##app housekeeping info
-MYNAME=`basename $0`
+MYNAME="`basename "${0}"`"
 VERBOSE=1	# levels: 0 quiet, 1 normal, 2 verbose, 3 very verbose
 
 RETURN_ERROR_USAGE=2
